@@ -22,16 +22,16 @@ def run(argv=None, save_main_session=True):
         "gs://leap-persistent/norlandrhagen/references/gridmet_1979_2020.parquet"
     )
     # output_path = "gs://leap-scratch/norlandrhagen/outputs/gridmet_subset.zarr"
-    output_path = "gs://leap-scratch/norlandrhagen/outputs/gridmet_time_subset_all_vars.zarr"
+    # output_path = "gs://leap-scratch/norlandrhagen/outputs/gridmet_time_subset_all_vars.zarr"
+    output_path = "gs://leap-scratch/norlandrhagen/outputs/gridmet_full.zarr"
 
-    combined_ds = xr.open_dataset(reference_path, engine="kerchunk", chunks=None)
+
+    source_dataset = xr.open_dataset(reference_path, engine="kerchunk", chunks=None)
     # subset the reference zarr
     # source_dataset = combined_ds.isel(day=slice(0, 50000))[
     #     ["air_temperature"]
     # ]  # all vars
-    source_dataset = combined_ds.isel(
-        day=slice(0, 1220)
-    )  # 1220 time steps, all vars. ie 200 time slices
+    # 1220 time steps, all vars. ie 200 time slices
     template = xbeam.make_template(source_dataset)
     # source_chunks = dict(source_dataset.sizes) # this is total size. Hardcode for now
     source_chunks = {"day": 61, "lat": 98, "lon": 231}
