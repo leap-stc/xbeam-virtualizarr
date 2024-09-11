@@ -51,5 +51,3 @@ jobs:
           --max_num_workers 100 \
           --temp_location gs://leap-persistent/norlandrhagen/dataflow_temp/temp/ \
           --staging_location gs://leap-persistent/norlandrhagen/dataflow_temp/staging/
-
-
