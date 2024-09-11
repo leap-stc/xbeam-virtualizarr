@@ -16,34 +16,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+
+      - name: Checkout Repo
       - uses: actions/checkout@v4
+
+      - name: Setup python
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: "Authenticate to Google Cloud"
         id: "auth"
         uses: "google-github-actions/auth@v2"
         with:
           credentials_json: "${{ secrets.LEAP_BAKERY_SERVICE_ACCOUNT }}"
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
 
       - name: "Install deps"
         run: |
-          python -m venv .venv
-          source .venv/bin/activate
           python -m pip install --upgrade pip
-          python -m pip install apache-beam[gcp] xarray_beam xarray kerchunk fastparquet pyarrow gcsfs google-cloud
-          python -m pip install -e .
-          echo "$VIRTUAL_ENV/bin" >> $GITHUB_PATH
-          echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
+          python -m pip install -e .[test]
+          python -m pip install apache-beam[gcp]
 
-
-      # - name: Get service account for beam
-      #   id: get-account
-      #   run: |
-      #     echo "SA_EMAIL=$(gcloud config get-value account)" >> $GITHUB_OUTPUT
-      #     echo $SA_EMAIL
-      #     echo $GITHUB_OUTPUT
 
 
       - name : "Deploy Beam pipeline"
