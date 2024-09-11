@@ -33,6 +33,9 @@ def run(argv=None, save_main_session=True):
     target_chunks = {"day": 16, "lat": 585, "lon": 1386}  # ~ full map 100MB chunks
 
     itemsize = 8
+    
+    # ToDo: looks like template is needed! https://github.com/google/xarray-beam/issues/85
+
 
     with beam.Pipeline(options=pipeline_options) as p:
         (
