@@ -33,9 +33,8 @@ def run(argv=None, save_main_session=True):
     target_chunks = {"day": 16, "lat": 585, "lon": 1386}  # ~ full map 100MB chunks
 
     itemsize = 8
-    
-    # ToDo: looks like template is needed! https://github.com/google/xarray-beam/issues/85
 
+    # ToDo: looks like template is needed! https://github.com/google/xarray-beam/issues/85
 
     with beam.Pipeline(options=pipeline_options) as p:
         (
@@ -46,9 +45,9 @@ def run(argv=None, save_main_session=True):
                 source_chunks,
                 target_chunks,
                 itemsize=itemsize,
-                max_mem=200000000.0 # 200mb-ish
+                max_mem=200000000.0,  # 200mb-ish
             )
-            | xbeam.ChunksToZarr(store = output_path, zarr_chunks=target_chunks )
+            | xbeam.ChunksToZarr(store=output_path, zarr_chunks=target_chunks)
         )
 
 
