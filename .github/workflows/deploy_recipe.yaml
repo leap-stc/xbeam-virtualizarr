@@ -48,7 +48,7 @@ jobs:
 
       - name : "Deploy Beam pipeline"
         run: |
-         python -m recipe.py \
+         python -m recipe \
           --runner DataflowRunner \
           --setup_file=./setup.py \
           --project leap-pangeo \
