@@ -33,12 +33,12 @@ jobs:
           pip install google-cloud
           # pip install apache-beam[gcp] xarray_beam kerchunk fastparquet pyarrow gcsfs google-cloud
 
-      - name: Get service account for beam
-        id: get-account
-        run: |
-          echo "SA_EMAIL=$(gcloud config get-value account)" >> $GITHUB_OUTPUT
-          echo $SA_EMAIL
-          echo $GITHUB_OUTPUT
+      # - name: Get service account for beam
+      #   id: get-account
+      #   run: |
+      #     echo "SA_EMAIL=$(gcloud config get-value account)" >> $GITHUB_OUTPUT
+      #     echo $SA_EMAIL
+      #     echo $GITHUB_OUTPUT
 
 
       - name : "Deploy Beam pipeline"
@@ -46,7 +46,6 @@ jobs:
          python feedstock/recipe.py \
           --runner DataflowRunner \
           --project leap-pangeo \
-          --service_account_email $SA_EMAIL \
           --job_name $JOB_NAME \
           --region us-central1 \
           --machine-type n1-highmem-2 \
@@ -55,6 +54,7 @@ jobs:
           --staging_location gs://leap-scratch/norlandrhagen/dataflow_temp/staging/
           --input gs://leap-scratch/norlandrhagen/dataflow_temp/input/ \
           --output gs://leap-scratch/norlandrhagen/dataflow_temp/output/ \
+        # --service_account_email $SA_EMAIL \
 
 
 
