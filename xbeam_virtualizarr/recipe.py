@@ -32,6 +32,7 @@ def run(argv=None, save_main_session=True):
     source_dataset = combined_ds.isel(
         day=slice(0, 1220)
     )  # 1220 time steps, all vars. ie 200 time slices
+    template = xbeam.make_template(source_dataset)
     # source_chunks = dict(source_dataset.sizes) # this is total size. Hardcode for now
     source_chunks = {"day": 61, "lat": 98, "lon": 231}
     target_chunks = {
@@ -56,7 +57,7 @@ def run(argv=None, save_main_session=True):
                 itemsize=itemsize,
                 max_mem=200000000.0,  # 200mb-ish
             )
-            | xbeam.ChunksToZarr(store=output_path, zarr_chunks=target_chunks)
+            | xbeam.ChunksToZarr(store=output_path, template=template, zarr_chunks=target_chunks)
         )
 
 
