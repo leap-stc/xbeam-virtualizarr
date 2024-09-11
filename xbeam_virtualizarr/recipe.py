@@ -23,9 +23,9 @@ def run(argv=None, save_main_session=True):
     )
     output_path = "gs://leap-scratch/norlandrhagen/outputs/gridmet_subset.zarr"
 
-    combined_ds = xr.open_dataset(reference_path, engine="kerchunk", chunks={})
+    combined_ds = xr.open_dataset(reference_path, engine="kerchunk", chunks=None)
     # subset the reference zarr
-    source_dataset = combined_ds.isel(day=slice(0, 10000))[
+    source_dataset = combined_ds.isel(day=slice(0, 5000))[
         ["air_temperature"]
     ]  # all vars
     # source_chunks = dict(source_dataset.sizes) # this is total size. Hardcode for now
@@ -43,7 +43,7 @@ def run(argv=None, save_main_session=True):
                 source_chunks,
                 target_chunks,
                 itemsize=itemsize,
-                max_mem=100000000.0 # 100mb-ish
+                max_mem=200000000.0 # 200mb-ish
             )
             | xbeam.ChunksToZarr(store = output_path, zarr_chunks=target_chunks )
         )
