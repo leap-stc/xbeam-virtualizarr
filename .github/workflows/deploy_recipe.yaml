@@ -34,17 +34,19 @@ jobs:
 
       - name: Get service account for beam
         id: get-account
-        run: echo "SA_EMAIL=$(gcloud config get-value account)" >> $GITHUB_OUTPUT
+        run: |
+          echo "SA_EMAIL=$(gcloud config get-value account)" >> $GITHUB_OUTPUT
+          echo $SA_EMAIL
 
 
       - name : "Deploy Beam pipeline"
         run: |
          python feedstock/recipe.py \
+          --runner DataflowRunner \
           --project leap-pangeo \
           --service_account_email $SA_EMAIL \
-          --job_name $JOB_NAME
+          --job_name $JOB_NAME \
           --region us-central1 \
-          --runner DataflowRunner \
           --machine-type n1-highmem-2 \
           --max_num_workers 10 \
 
