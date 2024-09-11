@@ -31,7 +31,6 @@ jobs:
         with:
           credentials_json: "${{ secrets.LEAP_BAKERY_SERVICE_ACCOUNT }}"
 
-
       - name: "Install deps"
         run: |
           python -m pip install --upgrade pip
