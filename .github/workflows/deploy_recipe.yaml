@@ -50,24 +50,7 @@ jobs:
           --machine_type n1-highmem-2 \
           --max_num_workers 10 \
           --num_workers 2 \
-          --temp_location gs://leap-scratch/norlandrhagen/dataflow_temp/temp/ \
-          --staging_location gs://leap-scratch/norlandrhagen/dataflow_temp/staging/
-          --service_account_email service@leap-pangeo.iam.gserviceaccount.com \
+          --temp_location gs://leap-persistent/norlandrhagen/dataflow_temp/temp/ \
+          --staging_location gs://leap-persistent/norlandrhagen/dataflow_temp/staging/
 
 
-
-      # - name: Wait for Dataflow jobs to finish
-      #   # I tried to make this reusable but the fucking thing would not accept env.JOB_NAME as input.
-      #   # AT that point, screw it, not worth it.
-      #   run: |
-      #     jobname="${{ env.JOB_NAME }}"
-      #     while true; do
-      #       count=$(gcloud dataflow jobs list --status=active --filter="name:${jobname}" --format="value(id)" | wc -l)
-      #       echo "Active Dataflow jobs: $count"
-      #       if [ "$count" -eq "0" ]; then
-      #         echo "No active Dataflow jobs found."
-      #         break
-      #       fi
-      #       echo "Waiting for Dataflow jobs to finish..."
-      #       sleep 20
-      #     done
