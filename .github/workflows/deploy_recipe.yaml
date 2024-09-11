@@ -50,5 +50,5 @@ jobs:
           --machine_type t2d-standard-16	 \
           --disk_size_gb 50 \
           --max_num_workers 50 \
-          --temp_location gs://leap-scratc/norlandrhagen/dataflow_temp/temp/ \
-          --staging_location gs://leap-scratc/norlandrhagen/dataflow_temp/staging/
+          --temp_location gs://leap-scratch/norlandrhagen/dataflow_temp/temp/ \
+          --staging_location gs://leap-scratch/norlandrhagen/dataflow_temp/staging/
