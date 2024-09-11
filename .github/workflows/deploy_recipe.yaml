@@ -41,7 +41,7 @@ jobs:
 
       - name : "Deploy Beam pipeline"
         run: |
-         python -m xbeam_virtualizarr/recipe.py \
+         python xbeam_virtualizarr/recipe.py \
           --runner DataflowRunner \
           --setup_file=./setup.py \
           --project leap-pangeo \
