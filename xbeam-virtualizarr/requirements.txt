@@ -1,8 +1,0 @@
-apache-beam[gcp]
-xarray_beam
-xarray
-kerchunk
-fastparquet
-pyarrow
-gcsfs
-google-cloud
