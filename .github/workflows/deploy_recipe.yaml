@@ -31,7 +31,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install google-cloud
-          # pip install apache-beam[gcp] xarray_beam kerchunk fastparquet pyarrow gcsfs google-cloud
+          # pip install apache-beam[gcp] xarray_beam xarray kerchunk fastparquet pyarrow gcsfs google-cloud
 
       # - name: Get service account for beam
       #   id: get-account
