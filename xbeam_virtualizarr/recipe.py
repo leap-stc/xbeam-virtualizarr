@@ -44,7 +44,7 @@ def run(argv=None, save_main_session=True):
                 target_chunks,
                 itemsize=itemsize,
             )
-            | xbeam.ChunksToZarr(output_path, template=None, target_chunks)
+            | xbeam.ChunksToZarr(output_path, target_chunks, template=None)
         )
 
 
