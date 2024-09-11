@@ -25,15 +25,14 @@ def run(argv=None, save_main_session=True):
 
     combined_ds = xr.open_dataset(reference_path, engine="kerchunk", chunks={})
     # subset the reference zarr
-    source_dataset = combined_ds.isel(day=slice(0, 10000))[
+    source_dataset = combined_ds.isel(day=slice(0, 2000))[
         ["air_temperature"]
     ]  # all vars
     # source_chunks = dict(source_dataset.sizes) # this is total size. Hardcode for now
     source_chunks = {"day": 61, "lat": 98, "lon": 231}
     target_chunks = {"day": 16, "lat": 585, "lon": 1386}  # ~ full map 100MB chunks
-    template = xbeam.make_template(source_dataset).isel(day=slice(0, 10000), drop=True)
 
-    itemsize = max(variable.dtype.itemsize for variable in template.values())
+    itemsize = 8
 
     with beam.Pipeline(options=pipeline_options) as p:
         (
@@ -45,7 +44,7 @@ def run(argv=None, save_main_session=True):
                 target_chunks,
                 itemsize=itemsize,
             )
-            | xbeam.ChunksToZarr(output_path, template, target_chunks)
+            | xbeam.ChunksToZarr(output_path, target_chunks)
         )
 
 
