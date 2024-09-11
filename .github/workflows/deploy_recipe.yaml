@@ -33,6 +33,7 @@ jobs:
           source .venv/bin/activate
           python -m pip install --upgrade pip
           python -m pip install apache-beam[gcp] xarray_beam xarray kerchunk fastparquet pyarrow gcsfs google-cloud
+          python -m pip install -e .
           echo "$VIRTUAL_ENV/bin" >> $GITHUB_PATH
           echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
 
