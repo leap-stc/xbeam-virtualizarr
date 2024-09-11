@@ -49,6 +49,10 @@ jobs:
           --region us-central1 \
           --machine-type n1-highmem-2 \
           --max_num_workers 10 \
+          --temp_location gs://leap-scratch/norlandrhagen/dataflow_temp/ \
+          --input gs://leap-scratch/norlandrhagen/dataflow_temp/ \
+          --output gs://leap-scratch/norlandrhagen/dataflow_temp/ \
+
 
 
       - name: Wait for Dataflow jobs to finish
