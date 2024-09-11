@@ -43,11 +43,10 @@ jobs:
         run: |
          python xbeam_virtualizarr/recipe.py \
           --runner DataflowRunner \
-          --setup_file=./setup.py \
           --project leap-pangeo \
           --job_name $JOB_NAME \
           --region us-central1 \
-          --machine-type n1-highmem-2 \
+          --machine_type n1-highmem-2 \
           --max_num_workers 10 \
           --temp_location gs://leap-scratch/norlandrhagen/dataflow_temp/temp/ \
           --staging_location gs://leap-scratch/norlandrhagen/dataflow_temp/staging/
