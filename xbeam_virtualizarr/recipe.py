@@ -25,7 +25,7 @@ def run(argv=None, save_main_session=True):
 
     combined_ds = xr.open_dataset(reference_path, engine="kerchunk", chunks=None)
     # subset the reference zarr
-    source_dataset = combined_ds.isel(day=slice(0, 20000))[
+    source_dataset = combined_ds.isel(day=slice(0, 50000))[
         ["air_temperature"]
     ]  # all vars
     # source_chunks = dict(source_dataset.sizes) # this is total size. Hardcode for now
