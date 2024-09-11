@@ -28,7 +28,8 @@ def run(argv=None, save_main_session=True):
     source_dataset = combined_ds.isel(day=slice(0, 1000))[
         ["air_temperature"]
     ]  # ~ 3.2 gb
-    source_chunks = dict(source_dataset.sizes)
+    # source_chunks = dict(source_dataset.sizes) # this is total size. Hardcode for now
+    source_chunks = {"day": 61, "lat": 98, "lon": 231}
     target_chunks = {"day": 16, "lat": 585, "lon": 1386}  # ~ full map 100MB chunks
     template = xbeam.make_template(source_dataset)
     itemsize = max(variable.dtype.itemsize for variable in template.values())
