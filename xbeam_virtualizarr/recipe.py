@@ -23,7 +23,7 @@ def run(argv=None, save_main_session=True):
     )
     output_path = "gs://leap-scratch/norlandrhagen/outputs/gridmet_subset.zarr"
 
-    combined_ds = xr.open_dataset(reference_path, engine="kerchunk", chunks={})
+    combined_ds = xr.open_dataset(reference_path, engine="kerchunk", chunks=None)
     # subset the reference zarr
     source_dataset = combined_ds.isel(day=slice(0, 1000))# all vars
     # source_chunks = dict(source_dataset.sizes) # this is total size. Hardcode for now
