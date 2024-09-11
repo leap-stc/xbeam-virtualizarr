@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="dataflow_job",
+    name="xbeam_virtualizarr",
     version="0.0.1",
     install_requires=[
         # 'apache-beam[gcp]',
