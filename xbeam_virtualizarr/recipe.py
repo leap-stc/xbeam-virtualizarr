@@ -32,7 +32,7 @@ def run(argv=None, save_main_session=True):
     source_chunks = {"day": 61, "lat": 98, "lon": 231}
     target_chunks = {"day": 16, "lat": 585, "lon": 1386}  # ~ full map 100MB chunks
 
-    itemsize = 8
+    itemsize =8
 
     with beam.Pipeline(options=pipeline_options) as p:
         (
@@ -44,7 +44,7 @@ def run(argv=None, save_main_session=True):
                 target_chunks,
                 itemsize=itemsize,
             )
-            | xbeam.ChunksToZarr(output_path, target_chunks)
+            | xbeam.ChunksToZarr(output_path, template=None, target_chunks)
         )
 
 
