@@ -30,44 +30,46 @@ jobs:
       - name: "Install deps"
         run: |
           python -m pip install --upgrade pip
-          pip install apache-beam[gcp] xarray_beam kerchunk fastparquet pyarrow gcsfs google-cloud
+          pip install google-cloud
+          # pip install apache-beam[gcp] xarray_beam kerchunk fastparquet pyarrow gcsfs google-cloud
 
       - name: Get service account for beam
         id: get-account
         run: |
           echo "SA_EMAIL=$(gcloud config get-value account)" >> $GITHUB_OUTPUT
           echo $SA_EMAIL
+          echo $GITHUB_OUTPUT
 
 
-      - name : "Deploy Beam pipeline"
-        run: |
-         python feedstock/recipe.py \
-          --runner DataflowRunner \
-          --project leap-pangeo \
-          --service_account_email $SA_EMAIL \
-          --job_name $JOB_NAME \
-          --region us-central1 \
-          --machine-type n1-highmem-2 \
-          --max_num_workers 10 \
-          --temp_location gs://leap-scratch/norlandrhagen/dataflow_temp/temp/ \
-          --staging_location gs://leap-scratch/norlandrhagen/dataflow_temp/staging/
-          --input gs://leap-scratch/norlandrhagen/dataflow_temp/input/ \
-          --output gs://leap-scratch/norlandrhagen/dataflow_temp/output/ \
+      # - name : "Deploy Beam pipeline"
+      #   run: |
+      #    python feedstock/recipe.py \
+      #     --runner DataflowRunner \
+      #     --project leap-pangeo \
+      #     --service_account_email $SA_EMAIL \
+      #     --job_name $JOB_NAME \
+      #     --region us-central1 \
+      #     --machine-type n1-highmem-2 \
+      #     --max_num_workers 10 \
+      #     --temp_location gs://leap-scratch/norlandrhagen/dataflow_temp/temp/ \
+      #     --staging_location gs://leap-scratch/norlandrhagen/dataflow_temp/staging/
+      #     --input gs://leap-scratch/norlandrhagen/dataflow_temp/input/ \
+      #     --output gs://leap-scratch/norlandrhagen/dataflow_temp/output/ \
 
 
 
-      - name: Wait for Dataflow jobs to finish
-        # I tried to make this reusable but the fucking thing would not accept env.JOB_NAME as input.
-        # AT that point, screw it, not worth it.
-        run: |
-          jobname="${{ env.JOB_NAME }}"
-          while true; do
-            count=$(gcloud dataflow jobs list --status=active --filter="name:${jobname}" --format="value(id)" | wc -l)
-            echo "Active Dataflow jobs: $count"
-            if [ "$count" -eq "0" ]; then
-              echo "No active Dataflow jobs found."
-              break
-            fi
-            echo "Waiting for Dataflow jobs to finish..."
-            sleep 20
-          done
+      # - name: Wait for Dataflow jobs to finish
+      #   # I tried to make this reusable but the fucking thing would not accept env.JOB_NAME as input.
+      #   # AT that point, screw it, not worth it.
+      #   run: |
+      #     jobname="${{ env.JOB_NAME }}"
+      #     while true; do
+      #       count=$(gcloud dataflow jobs list --status=active --filter="name:${jobname}" --format="value(id)" | wc -l)
+      #       echo "Active Dataflow jobs: $count"
+      #       if [ "$count" -eq "0" ]; then
+      #         echo "No active Dataflow jobs found."
+      #         break
+      #       fi
+      #       echo "Waiting for Dataflow jobs to finish..."
+      #       sleep 20
+      #     done
