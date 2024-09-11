@@ -45,6 +45,7 @@ jobs:
         run: |
          python feedstock/recipe.py \
           --runner DataflowRunner \
+          --requirements_file requirements.txt \
           --project leap-pangeo \
           --job_name $JOB_NAME \
           --region us-central1 \
@@ -55,7 +56,6 @@ jobs:
           --input gs://leap-scratch/norlandrhagen/dataflow_temp/input/ \
           --output gs://leap-scratch/norlandrhagen/dataflow_temp/output/ \
           --service_account_email service@leap-pangeo.iam.gserviceaccount.com \
-          --requirements_file 
 
 
 
