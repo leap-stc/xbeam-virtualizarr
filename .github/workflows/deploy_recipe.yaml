@@ -49,6 +49,6 @@ jobs:
           --region us-central1 \
           --machine_type t2d-standard-16	 \
           --disk_size_gb 50 \
-          --max_num_workers 100 \
+          --max_num_workers 50 \
           --temp_location gs://leap-persistent/norlandrhagen/dataflow_temp/temp/ \
           --staging_location gs://leap-persistent/norlandrhagen/dataflow_temp/staging/

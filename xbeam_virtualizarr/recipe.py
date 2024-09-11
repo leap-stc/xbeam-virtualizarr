@@ -25,12 +25,20 @@ def run(argv=None, save_main_session=True):
 
     combined_ds = xr.open_dataset(reference_path, engine="kerchunk", chunks=None)
     # subset the reference zarr
-    source_dataset = combined_ds.isel(day=slice(0, 50000))[
-        ["air_temperature"]
-    ]  # all vars
+    # source_dataset = combined_ds.isel(day=slice(0, 50000))[
+    #     ["air_temperature"]
+    # ]  # all vars
+    source_dataset = combined_ds.isel(
+        day=slice(0, 1220)
+    )  # 1220 time steps, all vars. ie 200 time slices
     # source_chunks = dict(source_dataset.sizes) # this is total size. Hardcode for now
     source_chunks = {"day": 61, "lat": 98, "lon": 231}
-    target_chunks = {"day": 16, "lat": 585, "lon": 1386}  # ~ full map 100MB chunks
+    target_chunks = {
+        "day": 600,
+        "lat": 98,
+        "lon": 231,
+    }  # bump chunks to 100MB. No major rechunking
+    # target_chunks = {"day": 16, "lat": 585, "lon": 1386}  # ~ full map 100MB chunks
 
     itemsize = 8
 
