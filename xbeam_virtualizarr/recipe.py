@@ -21,7 +21,8 @@ def run(argv=None, save_main_session=True):
     reference_path = (
         "gs://leap-persistent/norlandrhagen/references/gridmet_1979_2020.parquet"
     )
-    output_path = "gs://leap-scratch/norlandrhagen/outputs/gridmet_subset.zarr"
+    # output_path = "gs://leap-scratch/norlandrhagen/outputs/gridmet_subset.zarr"
+    output_path = "gs://leap-scratch/norlandrhagen/outputs/gridmet_time_subset_all_vars.zarr"
 
     combined_ds = xr.open_dataset(reference_path, engine="kerchunk", chunks=None)
     # subset the reference zarr
