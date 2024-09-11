@@ -47,9 +47,8 @@ jobs:
           --project leap-pangeo \
           --job_name $JOB_NAME \
           --region us-central1 \
-          --machine_type n1-highmem-2 \
-          --max_num_workers 10 \
-          --num_workers 2 \
+          --machine_type t2d-standard-8	 \
+          --max_num_workers 100 \
           --temp_location gs://leap-persistent/norlandrhagen/dataflow_temp/temp/ \
           --staging_location gs://leap-persistent/norlandrhagen/dataflow_temp/staging/
 
