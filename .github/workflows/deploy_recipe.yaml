@@ -45,7 +45,7 @@ jobs:
         run: |
          python recipe.py \
           --runner DataflowRunner \
-          --requirements_file requirements.txt \
+          --setup_file=./setup.py \
           --project leap-pangeo \
           --job_name $JOB_NAME \
           --region us-central1 \
