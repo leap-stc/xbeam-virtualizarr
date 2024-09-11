@@ -43,7 +43,7 @@ jobs:
 
       - name : "Deploy Beam pipeline"
         run: |
-         python feedstock/recipe.py \
+         python recipe.py \
           --runner DataflowRunner \
           --requirements_file requirements.txt \
           --project leap-pangeo \
