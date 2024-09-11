@@ -1,13 +1,12 @@
+import xarray as xr
+import apache_beam as beam
+import xarray_beam as xbeam
+import argparse
 
+from apache_beam.options.pipeline_options import PipelineOptions
+from apache_beam.options.pipeline_options import SetupOptions
 
 def run(argv=None, save_main_session=True):
-    import xarray as xr
-    import apache_beam as beam
-    import xarray_beam as xbeam
-    import argparse
-
-    from apache_beam.options.pipeline_options import PipelineOptions
-    from apache_beam.options.pipeline_options import SetupOptions
     """Main entry point; defines and runs the wordcount pipeline."""
     parser = argparse.ArgumentParser()
 
