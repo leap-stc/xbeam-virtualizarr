@@ -49,10 +49,9 @@ jobs:
           --region us-central1 \
           --machine_type n1-highmem-2 \
           --max_num_workers 10 \
+          --num_workers 2 \
           --temp_location gs://leap-scratch/norlandrhagen/dataflow_temp/temp/ \
           --staging_location gs://leap-scratch/norlandrhagen/dataflow_temp/staging/
-          --input gs://leap-scratch/norlandrhagen/dataflow_temp/input/ \
-          --output gs://leap-scratch/norlandrhagen/dataflow_temp/output/ \
           --service_account_email service@leap-pangeo.iam.gserviceaccount.com \
 
 
